@@ -122,19 +122,14 @@ public class Commandline{
     }
 
     public static void newSortList (ArrayList<ListItem> todoList){
+        Scanner scan = new Scanner(System.in);
         if(todoList.size() > 1){
             for (int i = 0; i < todoList.size()-1; i++){
                 for (int j = todoList.size()-1; j > i; j--){
-                    System.out.println("Size: " + todoList.size() + ", i: " + i + ", j: " + j);
                     if (todoList.get(j-1).getPriority() < todoList.get(j).getPriority()){
-                        ListItem temp2 = todoList.get(j);
-                        ListItem temp1 = todoList.get(j-1);
-                        //System.out.println("Swapping (j-1): " + temp1.toString() + ", and (j): " + temp2.toString());
-                        //todoList.remove(j); todoList.remove(j-1);
-                        todoList.add(j, temp1);
-                        todoList.add(j-1, temp2);
-                        //System.out.println("done swap");
-                        printList(todoList);
+                        ListItem temp = todoList.get(j-1);
+                        todoList.set(j-1, todoList.get(j));
+                        todoList.set(j, temp);
                     }
                 }
             }
