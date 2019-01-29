@@ -37,7 +37,7 @@ public class Commandline{
         } else if (selection == 3){
             setItemStatus(scan, todoList);
         } else if (selection == 4){
-            newSortList(todoList);
+            selectionSort(todoList);
             printList(todoList);
         } else {
             if(selection != 0) System.out.println("Invalid input" + '\n');
@@ -107,21 +107,33 @@ public class Commandline{
         }
     }
 
-    public static ArrayList<ListItem> sortList(ArrayList<ListItem> todoList){
-
-        ArrayList<ListItem> sortedList = new ArrayList<ListItem>();
-        
-        for(int j = 5; j >= 1; j--){
-            for(int i = 0; i < todoList.size(); i++){
-                if(todoList.get(i).getPriority() == j){
-                    sortedList.add(todoList.get(i));
+    public static void selectionSort(ArrayList<ListItem> todoList){
+        for (int i = 0; i < todoList.size(); i++){
+            ListItem temp = todoList.get(i);
+            int index = i;
+            for (int j = i+1; j < todoList.size(); j++){
+                if(todoList.get(j).getPriority() < temp.getPriority() ){
+                    temp = todoList.get(j);
+                    index = j;
+                  
                 } 
+            
             }
+            todoList.set(index,todoList.get(i));
+            todoList.set(i,temp);
         }
-       return sortedList;
+
     }
 
-    public static void newSortList (ArrayList<ListItem> todoList){
+    public static void insertionSort(ArrayList<ListItem> todoList){
+        for (int i = 0; i < todoList.size()-1; i++){
+            todoList.add(i);
+            for (int j = todoList.size()-1; j > i; j--){
+
+
+    }
+
+    public static void bubbleSort(ArrayList<ListItem> todoList){
         Scanner scan = new Scanner(System.in);
         if(todoList.size() > 1){
             for (int i = 0; i < todoList.size()-1; i++){
