@@ -52,6 +52,7 @@ public class Commandline{
         } else if (selection == 4){
             selectionSort(todoList);
             printList(todoList);
+            System.out.println(binarySearch(todoList, 5));
         } else if(selection == 5) {
             ListItem check = new ListItem("fda", 2);
             System.out.println(exists(todoList, check) + "" + '\n');
@@ -211,5 +212,29 @@ public class Commandline{
         }
         System.out.println("List size: " + todoList.size());
         System.out.println(complete + '\n');
+    }
+
+    public static boolean binarySearch ( ArrayList<ListItem> todoList, int num1){
+        int check = (todoList.size())/2;
+        int previousCheck = -10;
+        do {
+            if (num1 == todoList.get(check).getPriority()){
+                return true;
+            }
+            if (num1>todoList.get(check).getPriority()){
+                previousCheck = check;
+                check += (todoList.size()-check) / 2;
+                
+            }
+            if (num1<todoList.get(check).getPriority()){
+                previousCheck = check;
+                check = (todoList.size()-1-check) / 2;
+            }
+
+        } while(Math.abs(previousCheck-check) <= 1); 
+        return false;
+
+
+
     }
 }
