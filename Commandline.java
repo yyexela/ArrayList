@@ -243,8 +243,5 @@ public class Commandline{
         System.out.println("LOOP: Math.abs: " + Math.abs(previousCheck-check) + "" + '\n');
         } while( !(Math.abs(previousCheck-check) == 0)); 
         return false;
-
-
-
     }
 }
