@@ -13,6 +13,8 @@ public class Commandline{
         todoList.add(new ListItem("hi", 5));
         todoList.add(new ListItem("bye", 2));
         todoList.add(new ListItem("gda", 1));
+        todoList.add(new ListItem("gdg", 0));
+        todoList.add(new ListItem("gda", 1));
         todoList.add(new ListItem("bxv", 3));
         todoList.add(new ListItem("dsad", 2));
         todoList.add(new ListItem("nag", 4));
@@ -21,6 +23,7 @@ public class Commandline{
         todoList.add(new ListItem("gfd", 4));
         todoList.add(new ListItem("trw", 5));
         todoList.add(new ListItem("fda", 2));
+        todoList.add(new ListItem("dzg", 7));
 
         //Display menu options
         do {
@@ -52,7 +55,7 @@ public class Commandline{
         } else if (selection == 4){
             selectionSort(todoList);
             printList(todoList);
-            System.out.println(binarySearch(todoList, 5));
+            System.out.println(binarySearch(todoList, 7) + "" + '\n');
         } else if(selection == 5) {
             ListItem check = new ListItem("fda", 2);
             System.out.println(exists(todoList, check) + "" + '\n');
@@ -129,7 +132,7 @@ public class Commandline{
     }
 
     public static void selectionSort(ArrayList<ListItem> todoList){
-        printList(todoList);
+        //printList(todoList);
         for (int i = 0; i < todoList.size(); i++){
             ListItem temp = todoList.get(i);
             int index = i;
@@ -141,7 +144,7 @@ public class Commandline{
             }
             todoList.set(index,todoList.get(i));
             todoList.set(i,temp);
-            printList(todoList);
+            //printList(todoList);
         }
 
     }
@@ -214,24 +217,31 @@ public class Commandline{
         System.out.println(complete + '\n');
     }
 
-    public static boolean binarySearch ( ArrayList<ListItem> todoList, int num1){
+    public static boolean binarySearch ( ArrayList<ListItem> todoList, int num){
         int check = (todoList.size())/2;
         int previousCheck = -10;
+        System.out.println("Searching for: " + num + ", check(" + check + "): " + todoList.get(check).getPriority() );
         do {
-            if (num1 == todoList.get(check).getPriority()){
+            if (num == todoList.get(check).getPriority()){
+                System.out.println("found " + num + " at check(" + check + "): " + todoList.get(check).getPriority());
                 return true;
             }
-            if (num1>todoList.get(check).getPriority()){
+            if (num > todoList.get(check).getPriority()){
+                System.out.println("num: " + num + " > check(" + check + "): " + todoList.get(check).getPriority());
                 previousCheck = check;
                 check += (todoList.size()-check) / 2;
-                
+                System.out.println("previousCheck: " + previousCheck);
+                System.out.println("new check: " + check);
             }
-            if (num1<todoList.get(check).getPriority()){
+            if (num < todoList.get(check).getPriority()){
+                System.out.println("num: " + num + " < check(" + check + "): " + todoList.get(check).getPriority());
                 previousCheck = check;
-                check = (todoList.size()-1-check) / 2;
+                check = (check) / 2;
+                System.out.println("previousCheck: " + previousCheck);
+                System.out.println("new check: " + check);
             }
-
-        } while(Math.abs(previousCheck-check) <= 1); 
+        System.out.println("LOOP: Math.abs: " + Math.abs(previousCheck-check) + "" + '\n');
+        } while( !(Math.abs(previousCheck-check) == 0)); 
         return false;
 
 
